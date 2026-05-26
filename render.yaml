@@ -4,6 +4,8 @@ services:
     env: node
     plan: free
     branch: main
+    # Install devDependencies too so Prisma CLI and build tools are available
+    installCommand: npm ci --include=dev
     buildCommand: npm run build
     startCommand: npm run start
     envVars:

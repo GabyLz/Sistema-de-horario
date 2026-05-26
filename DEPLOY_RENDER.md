@@ -22,6 +22,21 @@ Preparación para desplegar en Render
      - `JWT_SECRET`, `SMTP_*`, `WHATSAPP_*`, `TELEGRAM_BOT_TOKEN`, etc.
    - Si usas Prisma, en la sección de Environment vars añade `DATABASE_URL` y ejecuta `prisma migrate deploy` manualmente si necesitas migraciones.
 
+   ## Error común: `Exited with status 127` durante el build
+
+   Significado: `127` suele indicar "command not found" — p. ej. `prisma` no estaba disponible porque `prisma` está en `devDependencies` y no se instalaron las dependencias de desarrollo durante el install.
+
+   Solución aplicada aquí:
+
+    - Añadimos en `render.yaml` la propiedad `installCommand: npm ci --include=dev` para que Render instale también las `devDependencies` (esto permite ejecutar `prisma generate` durante el build).
+
+   Alternativas:
+
+    - Mover `prisma` a `dependencies` en `package.json` (menos recomendado).
+    - Ejecutar migraciones manualmente desde la consola de Render en vez de automatizarlas.
+
+   Después de este cambio, vuelve a disparar un deploy en la rama `render-setup`.
+
 4. Seguridad
 
    - NUNCA subas `.env.local` con secretos al repositorio.
