@@ -1,0 +1,8 @@
+node_modules/
+.next/
+logs/
+.env*
+.vscode/
+coverage/
+tests/
+public/estilos-reportes.css

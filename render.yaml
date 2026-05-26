@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: horarios-unt-web
+    env: node
+    plan: free
+    branch: main
+    buildCommand: npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
