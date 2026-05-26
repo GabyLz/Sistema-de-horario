@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node ./node_modules/prisma/build/index.js generate && next build",
-    "postinstall": "node ./node_modules/prisma/build/index.js generate",
+    "build": "npm install --no-save prisma@5.8.0 && npx --yes prisma@5.8.0 generate && next build",
+    "postinstall": "echo postinstall-ok",
     "start": "next start",
     "lint": "next lint",
     "prisma:generate": "prisma generate",
