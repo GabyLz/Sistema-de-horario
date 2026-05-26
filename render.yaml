@@ -4,11 +4,13 @@ services:
     env: node
     plan: free
     branch: main
-    # Install devDependencies too so Prisma CLI and build tools are available
+    # Make the build self-sufficient so Next.js is always installed before build
     installCommand: npm ci --include=dev
-    buildCommand: npm run build
+    buildCommand: npm install --include=dev && npm run build
     startCommand: npm run start
     envVars:
+      - key: NODE_VERSION
+        value: "20"
       - key: NODE_ENV
         value: production
       - key: NPM_CONFIG_PRODUCTION

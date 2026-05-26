@@ -8,12 +8,13 @@ Preparación para desplegar en Render
 
    - `render.yaml`: configuración del servicio (sin secrets).
    - `.renderignore`: archivos a excluir durante deploy.
+   - El build ahora instala dependencias justo antes de compilar para evitar errores como `next: not found`.
 
 3. Pasos en Render (resumen)
 
    - Conecta tu repositorio GitHub a Render.
    - Crea un nuevo servicio web y selecciona la rama `main`.
-   - En Build Command usa: `npm run build`.
+   - En Build Command usa: `npm install --include=dev && npm run build`.
    - En Start Command usa: `npm run start`.
    - Añade las variables de entorno necesarias (no incluidas en el repo):
      - `DATABASE_URL` (Postgres, p.ej. Neon)
@@ -28,7 +29,7 @@ Preparación para desplegar en Render
 
    Solución aplicada aquí:
 
-    - Añadimos en `render.yaml` la propiedad `installCommand: npm ci --include=dev` para que Render instale también las `devDependencies` (esto permite ejecutar `prisma generate` durante el build).
+      - Añadimos en `render.yaml` `installCommand: npm ci --include=dev` y un `buildCommand` autosuficiente: `npm install --include=dev && npm run build`.
 
    Alternativas:
 
