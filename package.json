@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx --no-install prisma generate && next build",
-    "postinstall": "npx --no-install prisma generate",
+    "build": "node ./node_modules/prisma/build/index.js generate && next build",
+    "postinstall": "node ./node_modules/prisma/build/index.js generate",
     "start": "next start",
     "lint": "next lint",
     "prisma:generate": "prisma generate",
@@ -52,6 +52,9 @@
     "ws": "^8.16.0",
     "xlsx": "^0.18.5",
     "zod": "^3.22.4"
+  },
+  "engines": {
+    "node": "20.x"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.2.0",
